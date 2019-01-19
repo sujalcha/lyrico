@@ -17,18 +17,19 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete" />
+
+            <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Edit" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Delete" />
         </LinearLayout>
 
         <TextView
@@ -37,15 +38,11 @@
             android:layout_height="wrap_content"
             android:text="Song Title" />
 
-        <EditText
-            android:id="@+id/edittitle"
+        <TextView
+            android:id="@+id/titleedit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:text="Title of the  Song"
-            tools:layout_editor_absoluteX="16dp"
-            android:inputType="none"/>
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/textView2"
@@ -55,15 +52,29 @@
             android:text="Description"
             tools:layout_editor_absoluteX="0dp" />
 
-        <EditText
-            android:id="@+id/editlyrics"
+        <TextView
+            android:id="@+id/lyricsedit"
             android:layout_width="match_parent"
-            android:layout_height="348dp"
-            android:ems="10"
-            android:text="Descriptoin"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="110dp"
-            android:inputType="none"/>
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Updated" />
+
+        <TextView
+            android:id="@+id/dateedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="update" />
 
     </LinearLayout>
 </FrameLayout>

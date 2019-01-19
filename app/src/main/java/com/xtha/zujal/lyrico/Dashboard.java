@@ -11,10 +11,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,9 +52,63 @@ public class Dashboard extends Fragment {
         });
 
         ArrayList<HashMap<String, String>> userList = myDb.GetUsers();
-        ListView lv = (ListView) view.findViewById(R.id.user_list);
+        final ListView lv = (ListView) view.findViewById(R.id.user_list);
         ListAdapter adapter = new SimpleAdapter(context, userList, R.layout.songinfo,new String[]{"title","lyrics","date"}, new int[]{R.id.name, R.id.designation, R.id.location});
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                FragmentTransaction fr=getFragmentManager().beginTransaction();
+
+
+//                String text = lv.get(position).toString().trim();
+//                System.out.println("Chosen Country = : " + text);
+
+
+                Object listItem = lv.getItemAtPosition(position);
+                ArrayList<HashMap<String, String>>userListfromposion=myDb.GetUserByUserId(position+1);
+
+
+                String stitle = String.valueOf(userListfromposion.get(0).get("title"));
+                String slyrics = String.valueOf(userListfromposion.get(0).get("lyrics"));
+                String sdate = String.valueOf(userListfromposion.get(0).get("date"));
+
+             //   userListfromposion.("title",0);
+                String po=String.valueOf(position);
+
+
+
+            //   Toast.makeText(context,stitle+slyrics+sdate.toString(), Toast.LENGTH_SHORT).show();
+
+//                ListAdapter adapter = new SimpleAdapter(context, userListfromposion, R.layout.fragment_read_edit_delete,new String[]{"title","lyrics","date"}, new int[]{R.id.titleedit, R.id.lyricsedit, R.id.dateedit});
+//                lv.setAdapter(adapter);
+
+                Bundle bundle=new Bundle();
+                bundle.putString("titlee",stitle);
+                bundle.putString("lyricse",slyrics);
+                bundle.putString("datee",sdate);
+                ReadEditDelete readEditDelete=new ReadEditDelete();
+                readEditDelete.setArguments(bundle); //data being send to SecondFragment
+                fr.replace(R.id.fragment_container, readEditDelete);
+                fr.commit();
+
+
+//                TextView tedit =(TextView)view.findViewById(R.id.titleedit);
+//                TextView ledit =(TextView)view.findViewById(R.id.lyricsedit);
+//                TextView dedit =(TextView)view.findViewById(R.id.editdate);
+//
+//                String stitle = tedit.getText().toString();
+//                String slyrics = ledit.getText().toString();
+//                String sdate = dedit.getText().toString();
+//
+//                Toast.makeText(context,stitle,Toast.LENGTH_LONG).show();
+
+
+
+            }
+        });
 
 
 
