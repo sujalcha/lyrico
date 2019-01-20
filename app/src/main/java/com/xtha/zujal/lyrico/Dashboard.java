@@ -51,42 +51,55 @@ public class Dashboard extends Fragment {
             }
         });
 
-        ArrayList<HashMap<String, String>> userList = myDb.GetUsers();
+        final ArrayList<HashMap<String, String>> userList = myDb.GetUsers();
         final ListView lv = (ListView) view.findViewById(R.id.user_list);
         ListAdapter adapter = new SimpleAdapter(context, userList, R.layout.songinfo,new String[]{"title","lyrics","date"}, new int[]{R.id.name, R.id.designation, R.id.location});
+
+
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
 
                 FragmentTransaction fr=getFragmentManager().beginTransaction();
 
-
-//                String text = lv.get(position).toString().trim();
-//                System.out.println("Chosen Country = : " + text);
-
+                final int ssid = Integer.parseInt(userList.get(position).get("id"));
 
                 Object listItem = lv.getItemAtPosition(position);
-                ArrayList<HashMap<String, String>>userListfromposion=myDb.GetUserByUserId(position+1);
 
-                String sid = String.valueOf(userListfromposion.get(0).get("id"));
-                String stitle = String.valueOf(userListfromposion.get(0).get("title"));
-                String slyrics = String.valueOf(userListfromposion.get(0).get("lyrics"));
-                String sdate = String.valueOf(userListfromposion.get(0).get("date"));
-
-             //   userListfromposion.("title",0);
                 String po=String.valueOf(position);
+             //   Toast.makeText(context,po.toString(), Toast.LENGTH_SHORT).show();
+
+                ArrayList<HashMap<String, String>>userListfromposion=myDb.GetUserByUserId(ssid);
+
+               // Toast.makeText(context,userListfromposion.toString(), Toast.LENGTH_SHORT).show();
+
+                String sid="";
+                String stitle="";
+                String slyrics="";
+                String sdate="";
+                if(userListfromposion!= null && userListfromposion.size() !=0) {
+                     sid = String.valueOf(userListfromposion.get(0).get("id"));
+                     stitle = String.valueOf(userListfromposion.get(0).get("title"));
+                     slyrics = String.valueOf(userListfromposion.get(0).get("lyrics"));
+                     sdate = String.valueOf(userListfromposion.get(0).get("date"));
+
+                    Toast.makeText(context,sid+stitle+slyrics+sdate.toString(), Toast.LENGTH_SHORT).show();
+                }
 
 
 
-            //   Toast.makeText(context,stitle+slyrics+sdate.toString(), Toast.LENGTH_SHORT).show();
+
+
+
+             //  Toast.makeText(context,stitle+slyrics+sdate.toString(), Toast.LENGTH_SHORT).show();
 
 //                ListAdapter adapter = new SimpleAdapter(context, userListfromposion, R.layout.fragment_read_edit_delete,new String[]{"title","lyrics","date"}, new int[]{R.id.titleedit, R.id.lyricsedit, R.id.dateedit});
 //                lv.setAdapter(adapter);
 
                 Bundle bundle=new Bundle();
-                bundle.putString("id",sid);
+                bundle.putString("ide",sid);
                 bundle.putString("titlee",stitle);
                 bundle.putString("lyricse",slyrics);
                 bundle.putString("datee",sdate);

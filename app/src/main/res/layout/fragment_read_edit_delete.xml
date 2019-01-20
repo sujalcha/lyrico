@@ -24,7 +24,7 @@
                 android:text="Delete" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/editbut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -44,6 +44,14 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
+        <EditText
+            android:id="@+id/edituptitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
@@ -58,6 +66,13 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
+        <EditText
+            android:id="@+id/editupdes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
@@ -71,7 +86,7 @@
             android:text="Date" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/updatebut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="update" />

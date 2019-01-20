@@ -59,10 +59,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<HashMap<String, String>> GetUsers(){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
-        String query = "SELECT title, lyrics, date FROM "+ TABLE_NAME;
+        String query = "SELECT id, title, lyrics, date FROM "+ TABLE_NAME;
         Cursor cursor = db.rawQuery(query,null);
         while (cursor.moveToNext()){
             HashMap<String,String> user = new HashMap<>();
+            user.put("id",cursor.getString(cursor.getColumnIndex(COL_1)));
             user.put("title",cursor.getString(cursor.getColumnIndex(COL_2)));
             user.put("lyrics",cursor.getString(cursor.getColumnIndex(COL_3)));
             user.put("date",cursor.getString(cursor.getColumnIndex(COL_4)));
@@ -74,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<HashMap<String, String>> GetUserByUserId(int userid){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
-        String query = "SELECT title, lyrics, date FROM "+ TABLE_NAME;
+        String query = "SELECT id, title, lyrics, date FROM "+ TABLE_NAME;
         Cursor cursor = db.query(TABLE_NAME, new String[]{COL_1,COL_2, COL_3, COL_4}, COL_1+ "=?",new String[]{String.valueOf(userid)},null, null, null, null);
         if (cursor.moveToNext()){
             HashMap<String,String> user = new HashMap<>();
