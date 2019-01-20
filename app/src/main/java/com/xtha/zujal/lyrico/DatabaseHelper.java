@@ -75,9 +75,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
         String query = "SELECT title, lyrics, date FROM "+ TABLE_NAME;
-        Cursor cursor = db.query(TABLE_NAME, new String[]{COL_2, COL_3, COL_4}, COL_1+ "=?",new String[]{String.valueOf(userid)},null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COL_1,COL_2, COL_3, COL_4}, COL_1+ "=?",new String[]{String.valueOf(userid)},null, null, null, null);
         if (cursor.moveToNext()){
             HashMap<String,String> user = new HashMap<>();
+            user.put("id",cursor.getString(cursor.getColumnIndex(COL_1)));
             user.put("title",cursor.getString(cursor.getColumnIndex(COL_2)));
             user.put("lyrics",cursor.getString(cursor.getColumnIndex(COL_3)));
             user.put("date",cursor.getString(cursor.getColumnIndex(COL_4)));
@@ -98,8 +99,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Integer deleteData (String id) {
+    public Boolean deleteData (String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
+
+        long result=db.delete(TABLE_NAME, "ID = ?",new String[] {id});
+        if(result == -1)
+            return false;
+        else
+            return true;
     }
 }

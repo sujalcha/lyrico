@@ -70,7 +70,7 @@ public class Dashboard extends Fragment {
                 Object listItem = lv.getItemAtPosition(position);
                 ArrayList<HashMap<String, String>>userListfromposion=myDb.GetUserByUserId(position+1);
 
-
+                String sid = String.valueOf(userListfromposion.get(0).get("id"));
                 String stitle = String.valueOf(userListfromposion.get(0).get("title"));
                 String slyrics = String.valueOf(userListfromposion.get(0).get("lyrics"));
                 String sdate = String.valueOf(userListfromposion.get(0).get("date"));
@@ -86,6 +86,7 @@ public class Dashboard extends Fragment {
 //                lv.setAdapter(adapter);
 
                 Bundle bundle=new Bundle();
+                bundle.putString("id",sid);
                 bundle.putString("titlee",stitle);
                 bundle.putString("lyricse",slyrics);
                 bundle.putString("datee",sdate);

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +20,7 @@ public class ReadEditDelete extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        context =container.getContext();
 
         View view = inflater.inflate(R.layout.fragment_read_edit_delete, container, false);
 
@@ -27,8 +29,10 @@ public class ReadEditDelete extends Fragment {
         TextView dedit =(TextView)view.findViewById(R.id.dateedit);
 
 
-        tedit.setText("");
+
        Bundle bundle=getArguments();
+
+       final String sid=bundle.getString("id");
 //
 
         if (getArguments() != null) {
@@ -38,6 +42,27 @@ public class ReadEditDelete extends Fragment {
             dedit.setText(String.valueOf(bundle.getString("datee")));
         }
 
+        Button delete =(Button) view.findViewById(R.id.deletebut);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseHelper db= new DatabaseHelper(context);
+                boolean isDeleted=  db.deleteData(sid);
+
+                if(isDeleted == true) {
+                    Toast.makeText(context, "Data Deleted", Toast.LENGTH_LONG).show();
+
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container, new Dashboard());
+                    fr.commit();
+                }
+                else
+                    Toast.makeText(context,"Data not Deleted",Toast.LENGTH_LONG).show();
+
+
+            }
+        });
 
 
 
