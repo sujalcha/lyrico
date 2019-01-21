@@ -1,6 +1,8 @@
 package com.xtha.zujal.lyrico;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +29,7 @@ public class ReadEditDelete extends Fragment {
     Button edit;
     Button delete;
     Button update;
+    String sid="";
 
     DatabaseHelper myDb;
     @Override
@@ -50,7 +53,7 @@ public class ReadEditDelete extends Fragment {
 
        Bundle bundle=getArguments();
 
-       final String sid=bundle.getString("ide");
+       sid=bundle.getString("ide");
 //
 
         if (getArguments() != null) {
@@ -68,18 +71,47 @@ public class ReadEditDelete extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseHelper db= new DatabaseHelper(context);
-                boolean isDeleted=  db.deleteData(sid);
 
-                if(isDeleted == true) {
-                    Toast.makeText(context, "Data Deleted", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                    FragmentTransaction fr = getFragmentManager().beginTransaction();
-                    fr.replace(R.id.fragment_container, new Dashboard());
-                    fr.commit();
-                }
-                else
-                    Toast.makeText(context,"Data not Deleted",Toast.LENGTH_LONG).show();
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        DatabaseHelper db= new DatabaseHelper(context);
+                        boolean isDeleted=  db.deleteData(sid);
+
+                        if(isDeleted == true) {
+                            Toast.makeText(context, "Data Deleted", Toast.LENGTH_LONG).show();
+
+                            FragmentTransaction fr = getFragmentManager().beginTransaction();
+                            fr.replace(R.id.fragment_container, new Dashboard());
+                            fr.commit();
+                        }
+                        else
+                            Toast.makeText(context,"Data not Deleted",Toast.LENGTH_LONG).show();
+
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
 
 
             }

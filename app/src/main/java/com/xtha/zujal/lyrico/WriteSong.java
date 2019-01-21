@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ public class WriteSong extends Fragment {
     DatabaseHelper myDb;
     EditText edittitle,editlyrics;
     Context context;
+    String stringcheck=null;
+    String lyricscheck=null;
 
     @Nullable
     @Override
@@ -55,22 +58,49 @@ public class WriteSong extends Fragment {
                         SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy hh:mm ");
                         String dateString = sdf.format(date);
 
-                        Toast.makeText(context,dateString,Toast.LENGTH_LONG).show();
+                   //     Toast.makeText(context,dateString,Toast.LENGTH_LONG).show();
 
-                        boolean isInserted = myDb.insertData(   edittitle.getText().toString(),
-                                                                editlyrics.getText().toString(),
-                                                                dateString );
+                        stringcheck = edittitle.getText().toString();
+                        lyricscheck = editlyrics.getText().toString();
 
-
-                       if(isInserted == true)
-                            Toast.makeText(context,"Data Inserted",Toast.LENGTH_LONG).show();
-                      else
-                            Toast.makeText(context,"Data not Inserted",Toast.LENGTH_LONG).show();
+                        Log.w("myApp",stringcheck );
 
 
-                        FragmentTransaction fr=getFragmentManager().beginTransaction();
-                        fr.replace(R.id.fragment_container, new Dashboard());
-                        fr.commit();
+
+//
+                        if(stringcheck!=null && lyricscheck !=null && !stringcheck.isEmpty() && !lyricscheck.isEmpty()) {
+                            boolean isInserted = myDb.insertData(stringcheck,
+                                    lyricscheck,
+                                    dateString);
+
+
+                            if (isInserted == true)
+                                Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
+
+
+                            FragmentTransaction fr = getFragmentManager().beginTransaction();
+                            fr.replace(R.id.fragment_container, new Dashboard());
+                            fr.commit();
+
+
+                        }
+
+                        else if ((stringcheck==null) || (stringcheck.isEmpty()))
+                        {
+                            Toast.makeText(context,"Title cannot be left blank",Toast.LENGTH_LONG).show();
+                        }
+
+                        else if((lyricscheck==null) || (lyricscheck.isEmpty()))
+                        {
+                            Toast.makeText(context,"Please do write some lines from your song",Toast.LENGTH_LONG).show();
+                        }
+
+                        else
+                        {
+                            Toast.makeText(context, "Song not filled properly", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 }

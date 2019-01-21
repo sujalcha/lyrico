@@ -26,7 +26,11 @@ import java.util.HashMap;
 public class Dashboard extends Fragment {
     DatabaseHelper myDb;
     Context context;
-    Button btnviewAll;
+    int ssid;
+    String sid="";
+    String stitle="";
+    String slyrics="";
+    String sdate="";
 
 
     @Nullable
@@ -36,7 +40,6 @@ public class Dashboard extends Fragment {
         context =container.getContext();
 
         View view = inflater.inflate(R.layout.fragment_dashboard,container,false);
-
 
         myDb = new DatabaseHelper(this.context);
 
@@ -64,21 +67,16 @@ public class Dashboard extends Fragment {
 
                 FragmentTransaction fr=getFragmentManager().beginTransaction();
 
-                final int ssid = Integer.parseInt(userList.get(position).get("id"));
-
-                Object listItem = lv.getItemAtPosition(position);
+                ssid = Integer.parseInt(userList.get(position).get("id"));
 
                 String po=String.valueOf(position);
-             //   Toast.makeText(context,po.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,po.toString(), Toast.LENGTH_SHORT).show();
 
                 ArrayList<HashMap<String, String>>userListfromposion=myDb.GetUserByUserId(ssid);
 
-               // Toast.makeText(context,userListfromposion.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,userListfromposion.toString(), Toast.LENGTH_SHORT).show();
 
-                String sid="";
-                String stitle="";
-                String slyrics="";
-                String sdate="";
+
                 if(userListfromposion!= null && userListfromposion.size() !=0) {
                      sid = String.valueOf(userListfromposion.get(0).get("id"));
                      stitle = String.valueOf(userListfromposion.get(0).get("title"));
@@ -87,16 +85,6 @@ public class Dashboard extends Fragment {
 
                     Toast.makeText(context,sid+stitle+slyrics+sdate.toString(), Toast.LENGTH_SHORT).show();
                 }
-
-
-
-
-
-
-             //  Toast.makeText(context,stitle+slyrics+sdate.toString(), Toast.LENGTH_SHORT).show();
-
-//                ListAdapter adapter = new SimpleAdapter(context, userListfromposion, R.layout.fragment_read_edit_delete,new String[]{"title","lyrics","date"}, new int[]{R.id.titleedit, R.id.lyricsedit, R.id.dateedit});
-//                lv.setAdapter(adapter);
 
                 Bundle bundle=new Bundle();
                 bundle.putString("ide",sid);
@@ -108,68 +96,12 @@ public class Dashboard extends Fragment {
                 fr.replace(R.id.fragment_container, readEditDelete);
                 fr.commit();
 
-
-//                TextView tedit =(TextView)view.findViewById(R.id.titleedit);
-//                TextView ledit =(TextView)view.findViewById(R.id.lyricsedit);
-//                TextView dedit =(TextView)view.findViewById(R.id.editdate);
-//
-//                String stitle = tedit.getText().toString();
-//                String slyrics = ledit.getText().toString();
-//                String sdate = dedit.getText().toString();
-//
-//                Toast.makeText(context,stitle,Toast.LENGTH_LONG).show();
-
-
-
             }
         });
-
-
-
-        viewAll();
         return view;
     }
 
 
-    public void viewAll() {
-
-//        btnviewAll.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        myDb = new DatabaseHelper(context);
-//
-//                        Cursor res = myDb.getAllData();
-//                        if(res.getCount() == 0) {
-//                            // show message
-//                            showMessage("Error","Nothing found");
-//                            return;
-//                        }
-//
-//                        StringBuffer buffer = new StringBuffer();
-//                        while (res.moveToNext()) {
-//                            buffer.append("Id :"+ res.getString(0)+"\n");
-//                            buffer.append("Name :"+ res.getString(1)+"\n");
-//                            buffer.append("Surname :"+ res.getString(2)+"\n");
-//                            buffer.append("Marks :"+ res.getString(3)+"\n\n");
-//                        }
-//
-//                        // Show all data
-//                        showMessage("Data",buffer.toString());
-//                    }
-//                }
-//        );
-
-
-    }
-
-    public void showMessage(String title,String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
-    }
 
 
 }

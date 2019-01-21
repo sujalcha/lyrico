@@ -25,7 +25,6 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Title of the  Song"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:layout_editor_absoluteX="16dp" />
 
@@ -34,19 +33,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Description"
+            android:text="Lyrics"
             app:layout_constraintTop_toBottomOf="@+id/edittitle"
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
             android:id="@+id/editlyrics"
             android:layout_width="match_parent"
-            android:layout_height="348dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:text="Descriptoin"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="110dp" />
+            tools:layout_editor_absoluteY="110dp"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/SaveSong"
@@ -57,5 +56,11 @@
             tools:layout_editor_absoluteY="447dp" />
 
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ScrollView>
 
 </FrameLayout>
