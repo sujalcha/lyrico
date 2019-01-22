@@ -1,7 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context="com.xtha.zujal.lyrico.ReadEditDelete">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,7 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,14 +27,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Delete" />
+                    android:text="Delete"
+                    android:background="@drawable/button"
+                    android:textColor="#ffffff"/>
 
                 <Button
                     android:id="@+id/editbut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Edit" />
+                    android:text="Edit"
+                    android:background="@drawable/button"
+                    android:textColor="#ffffff"/>
 
             </LinearLayout>
 
@@ -40,60 +46,83 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Song Title" />
+                android:layout_marginTop="10dp"
+                android:text="Song Title"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/titleedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#ffffff"/>
 
             <EditText
                 android:id="@+id/edituptitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textCursorDrawable="@null"
+                android:background="@drawable/buttonwhite"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="#000000"
+                />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Description"
+                android:text="Lyrics"
+                android:textColor="#ffffff"
                 tools:layout_editor_absoluteX="0dp" />
 
             <TextView
                 android:id="@+id/lyricsedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#ffffff"/>
 
             <EditText
                 android:id="@+id/editupdes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/buttonwhite"
                 android:ems="10"
-                android:inputType="textMultiLine" />
-
-            <TextView
-                android:id="@+id/dateedit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date" />
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textCursorDrawable="@null"
+                android:textColor="#000000"
+               />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Last Updated" />
+                android:layout_marginTop="10dp"
+                android:text="Last Updated"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/dateedit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="#ffffff" />
 
             <Button
                 android:id="@+id/updatebut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="update" />
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button"
+                android:text="update"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
     </ScrollView>
@@ -104,4 +133,4 @@
         android:orientation="vertical">
 
     </LinearLayout>
-</FrameLayout>
+</RelativeLayout>

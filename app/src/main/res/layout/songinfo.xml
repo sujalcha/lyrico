@@ -1,34 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dp"
+
+    android:orientation="horizontal"
+    android:padding="5dip"
+    android:paddingBottom="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dip" >
+        android:background="@drawable/buttonwhite"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/designation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginTop="7dp"
+            android:maxLines="2"
+            android:textColor="@android:color/black"
+            android:textSize="14dp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
-
-            <TextView
-                android:id="@+id/designation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_marginTop="7dp"
-                android:lines="2"
-                android:maxLines="2"
-                android:textSize="14dp"
-                android:textColor="@android:color/white"/>
+                android:layout_alignBaseline="@+id/designation"
+                android:layout_alignBottom="@+id/designation"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:text="Updated: "
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/location"
@@ -37,9 +64,12 @@
                 android:layout_alignBaseline="@+id/designation"
                 android:layout_alignBottom="@+id/designation"
                 android:layout_alignParentRight="true"
-                android:textSize="14dp"
-                android:textColor="@android:color/white"/>
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
